@@ -1,0 +1,25 @@
+{
+  "name": "postgres-dev",
+  "dockerComposeFile": [
+    "../docker-compose.yml"
+  ],
+  "service": "dev-container",
+  "workspaceFolder": "/course",
+  "onCreateCommand": "git config --system --add safe.directory ${containerWorkspaceFolder}",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ckolkman.vscode-postgres",
+        "eamodio.gitlens",
+        "adpyke.vscode-sql-formatter"
+      ],
+      "settings": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "adpyke.vscode-sql-formatter",
+        "sql-formatter.formatOnSave": true,
+        "sql-formatter.uppercase": true,
+        "sql-formatter.linesBetweenQueries": 2
+      }
+    }
+  }
+}

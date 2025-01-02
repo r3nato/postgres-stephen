@@ -1,0 +1,39 @@
+services:
+
+  dev-container:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    command: sh -c 'while sleep 3600; do :; done'
+    depends_on:
+      - db
+    volumes:
+      - .:/course
+
+  db:
+    image: postgres:17.2-alpine3.21
+    environment:
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4:8.14
+    environment:
+      PGADMIN_DEFAULT_EMAIL: course@course.com
+      PGADMIN_DEFAULT_PASSWORD: pgadmin
+    depends_on:
+      - db
+    ports:
+      - 8085:80
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    
+
+volumes:
+    db_data:
+    pgadmin_data:
+
+
